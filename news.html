@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#007A4D" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Univio SA" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>News & Deadlines — Univio SA</title>
+   <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner"><div class="loader-ring"></div><p>Loading…</p></div>
+</div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand"><div class="logo-mark">U</div><span>Univio <em>SA</em></span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a><a href="universities.html">Universities</a>
+    <a href="news.html" class="active">News & Deadlines</a><a href="bookmarks.html">Bookmarks</a>
+  </div>
+  <div class="nav-actions">
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <svg id="darkModeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <div id="notifBellContainer"></div>
+
+    <button class="btn-bookmark-nav" onclick="location.href='bookmarks.html'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span class="bookmark-count" id="navBookmarkCount"></span>
+    </button>
+    <button class="nav-hamburger" id="hamburger">
+      <svg id="hamburgerIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+<button class="back-to-top" id="backToTop" title="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="universities.html">Universities</a>
+  <a href="news.html">News & Deadlines</a><a href="bookmarks.html">Bookmarks</a>
+</div>
+
+<div class="news-hero">
+  <div class="hero-eyebrow" style="animation:none;margin:0 auto 20px"> Stay Informed</div>
+  <h1>News & <span style="color:var(--gold)">Deadlines</span></h1>
+  <p>Important dates, NSFAS updates, bursaries and tips for prospective students.</p>
+</div>
+<div class="flag-stripe"></div>
+
+<div style="max-width:800px;margin:0 auto;padding:56px 5%">
+
+  <!-- Filter chips -->
+  <div class="filter-chips" style="margin-bottom:28px">
+    <div class="chip active" data-tag="">All</div>
+    <div class="chip chip-gold" data-tag="deadline">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:3px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Deadlines
+    </div>
+    <div class="chip" data-tag="nsfas">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:3px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      NSFAS
+    </div>
+    <div class="chip" data-tag="bursary">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:3px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Bursaries
+    </div>
+    <div class="chip" data-tag="news">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:3px"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
+      News
+    </div>
+    <div class="chip" data-tag="tip">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Tips
+    </div>
+  </div>
+
+  <!-- News grid -->
+  <div class="news-grid" id="newsGrid">
+    <div style="text-align:center;padding:40px;color:var(--grey-dark);grid-column:1/-1">
+      <div class="loader-ring" style="margin:0 auto 12px"></div><p>Loading posts…</p>
+    </div>
+  </div>
+
+  <!-- Key Dates panel -->
+  <div style="background:var(--white);border-radius:var(--radius-md);border:1.5px solid var(--grey-light);box-shadow:var(--shadow-card);padding:24px;margin-top:40px;margin-bottom:24px">
+    <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--black);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:8px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Key Dates 2026/2027
+    </h3>
+    <div class="timeline" id="timelineContainer"></div>
+  </div>
+
+  <!-- NSFAS panel -->
+  <div style="background:var(--off-black);border-radius:var(--radius-md);padding:24px;margin-bottom:24px;border:1px solid rgba(255,184,28,0.2)">
+    <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      NSFAS 2026
+    </h3>
+    <p style="font-size:0.85rem;color:var(--grey-mid);line-height:1.7;margin-bottom:14px">The National Student Financial Aid Scheme provides bursaries to qualifying South African students.</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;font-size:0.82rem"><span style="color:var(--grey-mid)">Application Opens</span><span style="color:var(--white);font-weight:600;font-family:var(--font-mono)">Sep 2026</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:0.82rem"><span style="color:var(--grey-mid)">Application Closes</span><span style="color:var(--gold);font-weight:600;font-family:var(--font-mono)">Nov 2026</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:0.82rem"><span style="color:var(--grey-mid)">Household Income Cap</span><span style="color:var(--white);font-weight:600;font-family:var(--font-mono)">R350,000/yr</span></div>
+    </div>
+    <a href="https://www.nsfas.org.za" target="_blank" class="btn btn-gold btn-sm" style="width:100%;justify-content:center">Apply via NSFAS →</a>
+  </div>
+
+  <!-- APS Calculator panel -->
+  <div style="background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:var(--radius-md);padding:24px;text-align:center;margin-bottom:40px">
+    <div style="margin-bottom:12px;display:flex;justify-content:center">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+    </div>
+    <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:8px">Calculate Your APS</h3>
+    <p style="font-size:0.82rem;color:rgba(255,255,255,0.75);margin-bottom:16px">Enter your marks and instantly see your APS score.</p>
+    <button id="openApsBtn" class="btn btn-gold btn-sm" style="width:100%;justify-content:center">Open APS Calculator →</button>
+  </div>
+
+</div>
+
+<!-- APS Modal -->
+<div class="modal-overlay" id="apsModal">
+  <div class="modal" style="background:var(--white);max-width:540px">
+    <div class="modal-header" style="background:var(--green);border-radius:var(--radius-md) var(--radius-md) 0 0">
+      <h3 style="color:white;display:flex;align-items:center;gap:8px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+        APS Score Calculator
+      </h3>
+      <button class="modal-close" id="closeApsBtn" style="color:white;background:rgba(255,255,255,0.15)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:0.85rem;color:var(--grey-dark);margin-bottom:20px">Enter the percentage you scored in each subject. Life Orientation is excluded.</p>
+      <div id="apsSubjects" style="display:flex;flex-direction:column;gap:10px"></div>
+      <div style="margin-top:20px;padding:16px;background:var(--cream);border-radius:var(--radius-sm);text-align:center">
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--grey-mid);text-transform:uppercase;letter-spacing:1px">Your APS Score</div>
+        <div id="apsResult" style="font-family:var(--font-display);font-size:3rem;font-weight:900;color:var(--green);line-height:1">—</div>
+        <div id="apsAdvice" style="font-size:0.85rem;color:var(--grey-dark);margin-top:6px"></div>
+      </div>
+    </div>
+    <div class="modal-footer" style="background:var(--cream)">
+      <a href="universities.html" class="btn btn-primary btn-sm">See Qualifying Universities →</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand" style="margin-bottom:10px"><div class="logo-mark">U</div><span>Univio <em>SA</em></span></div>
+      <p>Your free guide to South African university applications.</p>
+      <div class="footer-flag" style="margin-top:16px"></div>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><a href="index.html">Home</a><a href="universities.html">Universities</a><a href="news.html">News & Deadlines</a><a href="bookmarks.html">Bookmarks</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="https://www.nsfas.org.za" target="_blank">NSFAS</a><a href="https://www.dhet.gov.za" target="_blank">DHET</a><a href="https://www.funza.mobi" target="_blank">Funza Lushaka</a></div>
+    <div class="footer-col"><h4>Admin</h4><a href="admin-login.html">Admin Login</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Univio SA,created by eYeT Solutions. Always verify with official university websites.</p>
+    <div class="footer-flag"></div>
+  </div>
+</footer>
+<div class="toast-container" id="toastContainer"></div>
+
+<script type="module" src="./js/news.js"></script>
+<script type="module" src="./js/firebase-config.js"></script>
+<script type="module" src="./js/app.js"></script>
+
+<!-- PWA Install Banner -->
+<div id="pwaInstallBanner">
+  <div class="pwa-banner-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+  </div>
+  <div class="pwa-banner-text">
+    <strong>Install Univio SA</strong>
+    <span>Add to your home screen for quick access — no app store needed.</span>
+  </div>
+  <div class="pwa-banner-actions">
+    <button class="pwa-install-btn" id="pwaInstallBtn">Install App</button>
+    <button class="pwa-dismiss-btn" id="pwaDismissBtn">Not now</button>
+  </div>
+</div>
+
+<!-- Community Chat -->
+<script type="module" src="./js/chat.js"></script>
+
+<!-- PWA install prompt logic -->
+<script>
+(function() {
+  let deferredPrompt = null;
+  const DISMISSED_KEY = "univio_pwa_dismissed";
+
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!localStorage.getItem(DISMISSED_KEY)) {
+      setTimeout(() => {
+        const banner = document.getElementById("pwaInstallBanner");
+        if (banner) banner.classList.add("visible");
+      }, 3000);
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    const banner = document.getElementById("pwaInstallBanner");
+    if (banner) banner.classList.remove("visible");
+    deferredPrompt = null;
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const installBtn  = document.getElementById("pwaInstallBtn");
+    const dismissBtn  = document.getElementById("pwaDismissBtn");
+
+    installBtn?.addEventListener("click", async () => {
+      const banner = document.getElementById("pwaInstallBanner");
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === "accepted") {
+          if (banner) banner.classList.remove("visible");
+        }
+        deferredPrompt = null;
+      }
+    });
+
+    dismissBtn?.addEventListener("click", () => {
+      const banner = document.getElementById("pwaInstallBanner");
+      if (banner) banner.classList.remove("visible");
+      localStorage.setItem(DISMISSED_KEY, "1");
+    });
+  });
+})();
+</script>
+
+<script type="module">
+  import { renderNotificationBell } from "./js/notifications.js";
+  document.addEventListener("DOMContentLoaded", () => {
+    const c = document.getElementById("notifBellContainer");
+    if (c) renderNotificationBell(c);
+  });
+</script>
+</body>
+</html>

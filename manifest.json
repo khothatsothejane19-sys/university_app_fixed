@@ -1,0 +1,58 @@
+{
+  "name": "Univio SA",
+  "short_name": "Univio SA",
+  "description": "Find South African universities, check application statuses, deadlines and APS scores.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1A1A1A",
+  "theme_color": "#007A4D",
+  "orientation": "portrait-primary",
+  "lang": "en-ZA",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "./icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["education", "reference"],
+  "shortcuts": [
+    {
+      "name": "Universities",
+      "short_name": "Universities",
+      "description": "Browse all universities",
+      "url": "./universities.html",
+      "icons": [{ "src": "./icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "News & Deadlines",
+      "short_name": "Deadlines",
+      "description": "View application deadlines",
+      "url": "./news.html",
+      "icons": [{ "src": "./icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "My Bookmarks",
+      "short_name": "Bookmarks",
+      "description": "View saved universities",
+      "url": "./bookmarks.html",
+      "icons": [{ "src": "./icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

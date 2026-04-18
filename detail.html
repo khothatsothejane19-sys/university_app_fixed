@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#007A4D" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Univio SA" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>University Detail — Univio SA</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    .detail-hero {
+      background: var(--off-black);
+      padding: 100px 5% 56px;
+      border-bottom: 4px solid var(--gold);
+      position: relative;
+      overflow: hidden;
+    }
+    .detail-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(0,122,77,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .detail-hero-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: flex-start; gap: 32px;
+      flex-wrap: wrap;
+    }
+    .detail-logo-box {
+      width: 100px; height: 100px; border-radius: var(--radius-md);
+      background: var(--white);
+      border: 3px solid rgba(255,184,28,0.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .detail-logo-box img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+    .detail-logo-placeholder {
+      font-family: var(--font-display);
+      font-size: 2.5rem; font-weight: 900; color: var(--green);
+    }
+    .detail-title-group { flex: 1; min-width: 240px; }
+    .detail-title-group h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 900; color: var(--white);
+      letter-spacing: -1px; line-height: 1.1;
+    }
+    .detail-meta {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
+    }
+    .detail-meta-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 500;
+      background: rgba(255,255,255,0.08);
+      color: var(--grey-light);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .detail-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+
+    .detail-body {
+      max-width: 1100px; margin: 0 auto;
+      padding: 48px 5%;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 36px;
+      align-items: start;
+    }
+    .detail-card {
+      background: var(--white);
+      border: 1.5px solid var(--grey-light);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .detail-card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--grey-light);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .detail-card-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-weight: 700; color: var(--black);
+    }
+    .detail-card-header .icon { font-size: 1.1rem; }
+    .detail-card-body { padding: 20px 24px; }
+
+    .key-facts-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .key-fact {
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+    .key-fact .label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem; color: var(--grey-mid);
+      text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .key-fact .value {
+      font-size: 1rem; font-weight: 700; color: var(--black);
+      margin-top: 4px;
+    }
+    .key-fact .value.green { color: var(--green); font-size: 1.3rem; font-family: var(--font-display); }
+    .key-fact .value.gold  { color: var(--gold-dark); }
+
+    .faculty-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .faculty-tag {
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600;
+      background: rgba(0,122,77,0.08);
+      color: var(--green-dark);
+      border: 1px solid rgba(0,122,77,0.2);
+    }
+
+    .requirement-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--grey-light);
+      font-size: 0.875rem;
+    }
+    .requirement-row:last-child { border-bottom: none; }
+    .requirement-row .req-label { color: var(--grey-dark); }
+    .requirement-row .req-value { font-weight: 600; color: var(--black); }
+
+    .sidebar-card {
+      background: var(--white);
+      border: 1.5px solid var(--grey-light);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .sidebar-card-header {
+      padding: 14px 20px;
+      background: var(--off-black);
+      font-family: var(--font-mono);
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .sidebar-card-body { padding: 18px 20px; }
+
+    .apply-cta-box {
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .apply-cta-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .apply-cta-box p {
+      font-size: 0.82rem; color: rgba(255,255,255,0.75);
+      margin-bottom: 18px; line-height: 1.5;
+    }
+
+    .similar-uni-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--grey-light);
+      cursor: pointer; transition: var(--transition);
+      text-decoration: none; color: inherit;
+    }
+    .similar-uni-item:last-child { border-bottom: none; }
+    .similar-uni-item:hover { color: var(--green); }
+    .similar-mini-logo {
+      width: 32px; height: 32px; border-radius: 6px;
+      background: var(--cream);
+      border: 1.5px solid var(--grey-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 0.8rem;
+      font-weight: 700; color: var(--green); flex-shrink: 0;
+    }
+    .similar-uni-name { font-size: 0.85rem; font-weight: 600; }
+    .similar-uni-aps  { font-size: 0.75rem; color: var(--grey-mid); margin-top: 1px; }
+
+    @media (max-width: 768px) {
+      .detail-body { grid-template-columns: 1fr; }
+      .key-facts-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .key-facts-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner"><div class="loader-ring"></div><p>Loading…</p></div>
+</div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand"><div class="logo-mark">U</div><span>Univio <em>SA</em></span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="universities.html" class="active">Universities</a>
+    <a href="news.html">News & Deadlines</a>
+    <a href="bookmarks.html">Bookmarks</a>
+  </div>
+  <div class="nav-actions">
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <div id="notifBellContainer"></div>
+
+    <button class="btn-bookmark-nav" onclick="location.href='bookmarks.html'" title="My Bookmarks">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span class="bookmark-count" id="navBookmarkCount"></span>
+    </button>
+    <button class="nav-hamburger" id="hamburger">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+<button class="back-to-top" id="backToTop" title="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"> Home</a>
+  <a href="universities.html"> Universities</a>
+  <a href="news.html"> News & Deadlines</a>
+  <a href="bookmarks.html"> Bookmarks</a>
+</div>
+
+<!-- Breadcrumb -->
+<div style="background:var(--cream);border-bottom:1px solid var(--grey-light);padding:10px 5%;margin-top:68px;">
+  <div style="max-width:1100px;margin:0 auto;font-size:0.8rem;color:var(--grey-mid);display:flex;align-items:center;gap:6px;">
+    <a href="index.html" style="color:var(--grey-mid);transition:var(--transition)" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--grey-mid)'">Home</a>
+    <span>›</span>
+    <a href="universities.html" style="color:var(--grey-mid);transition:var(--transition)" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--grey-mid)'">Universities</a>
+    <span>›</span>
+    <span id="breadcrumbName" style="color:var(--black);font-weight:500;">Loading…</span>
+  </div>
+</div>
+
+<!-- Detail Hero (populated by JS) -->
+<div class="detail-hero" id="detailHero" style="margin-top:0">
+  <div class="detail-hero-inner">
+    <div style="text-align:center;color:var(--grey-mid);padding:40px 0;width:100%">
+      <div class="loader-ring" style="margin:0 auto 12px"></div>
+      <p>Loading university details…</p>
+    </div>
+  </div>
+</div>
+<div class="flag-stripe"></div>
+
+<!-- Detail Body -->
+<div class="detail-body" id="detailBody" style="display:none">
+
+  <!-- LEFT COLUMN -->
+  <div>
+    <!-- About -->
+    <div class="detail-card">
+      <div class="detail-card-header"><span class="icon"></span><h3>About This University</h3></div>
+      <div class="detail-card-body">
+        <p id="detailDescription" style="color:var(--grey-dark);line-height:1.8;font-size:0.95rem">—</p>
+      </div>
+    </div>
+
+    <!-- Key Facts -->
+    <div class="detail-card">
+      <div class="detail-card-header"><span class="icon"></span><h3>Key Application Facts</h3></div>
+      <div class="detail-card-body">
+        <div class="key-facts-grid" id="keyFactsGrid"></div>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="detail-card" id="countdownCard">
+      <div class="detail-card-header"><span class="icon"></span><h3>Application Deadline Countdown</h3></div>
+      <div class="detail-card-body" id="detailCountdown"></div>
+    </div>
+
+    <!-- Faculties -->
+    <div class="detail-card" id="facultiesCard">
+      <div class="detail-card-header"><span class="icon"></span><h3>Faculties & Courses</h3></div>
+      <div class="detail-card-body">
+        <div class="faculty-tags" id="facultyTags"></div>
+        <p style="font-size:0.8rem;color:var(--grey-mid);margin-top:12px;">Always check the official university website for the full list of programmes and entry requirements per faculty.</p>
+      </div>
+    </div>
+
+    <!-- Requirements -->
+    <div class="detail-card">
+      <div class="detail-card-header"><span class="icon"></span><h3>General Requirements</h3></div>
+      <div class="detail-card-body" id="requirementsBody">
+        <div class="requirement-row"><span class="req-label">National Senior Certificate (NSC)</span><span class="req-value" style="display:inline-flex;align-items:center;gap:4px">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  Required
+</span></div>
+        <div class="requirement-row"><span class="req-label">Minimum APS Score</span><span class="req-value" id="reqAps">—</span></div>
+        <div class="requirement-row"><span class="req-label">English Proficiency</span><span class="req-value">Required</span></div>
+        <div class="requirement-row"><span class="req-label">Application Fee</span><span class="req-value" id="reqFee">—</span></div>
+        <div class="requirement-row"><span class="req-label">NBT Tests</span><span class="req-value">May be required (check university website)</span></div>
+        <p style="font-size:0.78rem;color:var(--grey-mid);margin-top:14px;"> Requirements vary per faculty and programme. Always verify with the official university admissions office.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN / SIDEBAR -->
+  <div>
+    <!-- Apply CTA -->
+    <div class="apply-cta-box" id="applyCtaBox">
+      <h3>Ready to Apply?</h3>
+      <p>Submit your application before the deadline to secure your spot.</p>
+      <a id="applyNowLink" href="#" target="_blank" rel="noopener" class="btn btn-gold" style="width:100%;justify-content:center;margin-bottom:10px">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+  Apply Now
+</a>
+      <a id="prospectusLink" href="#" download target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="width:100%;justify-content:center;display:none">📥 Download Prospectus</a>
+      <p id="noProspectusNote" style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:6px;display:none">No prospectus uploaded yet.</p>
+    </div>
+
+    <!-- Status Card -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header"> Application Status</div>
+      <div class="sidebar-card-body">
+        <div style="margin-bottom:12px" id="sidebarStatus"></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+            <span style="color:var(--grey-dark)">Opens</span>
+            <span style="font-weight:600" id="sidebarOpen">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+            <span style="color:var(--grey-dark)">Closes</span>
+            <span style="font-weight:600;color:var(--red)" id="sidebarClose">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem">
+            <span style="color:var(--grey-dark)">Min APS</span>
+            <span style="font-weight:700;color:var(--green);font-family:var(--font-display);font-size:1.1rem" id="sidebarAps">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bookmark & Share -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header" style="display:flex;align-items:center;gap:6px">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+  Save &amp; Share
+</div>
+      <div class="sidebar-card-body" style="display:flex;flex-direction:column;gap:10px">
+        <button id="bookmarkDetailBtn" class="btn btn-sm" style="background:var(--cream);border:1.5px solid var(--grey-light);color:var(--black);width:100%;justify-content:center">
+           Save to Bookmarks
+        </button>
+        <button id="shareBtn" class="btn btn-sm" style="background:var(--cream);border:1.5px solid var(--grey-light);color:var(--black);width:100%;justify-content:center">
+           Share This University
+        </button>
+        <button id="printBtn" class="btn btn-sm" style="background:var(--cream);border:1.5px solid var(--grey-light);color:var(--black);width:100%;justify-content:center">
+           Print Info Sheet
+        </button>
+      </div>
+    </div>
+
+    <!-- Similar Universities -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header"> Similar Universities</div>
+      <div class="sidebar-card-body" id="similarUnis">
+        <p style="color:var(--grey-mid);font-size:0.85rem">Loading…</p>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header"> Quick Links</div>
+      <div class="sidebar-card-body" style="display:flex;flex-direction:column;gap:8px">
+        <a href="https://www.nsfas.org.za" target="_blank" rel="noopener" style="font-size:0.85rem;color:var(--green);display:flex;align-items:center;gap:6px"> Apply for NSFAS Funding</a>
+        <a href="news.html" style="font-size:0.85rem;color:var(--green);display:flex;align-items:center;gap:6px"> View All Deadlines</a>
+        <a href="news.html#aps" style="font-size:0.85rem;color:var(--green);display:flex;align-items:center;gap:6px"> Calculate Your APS</a>
+        <a href="universities.html" style="font-size:0.85rem;color:var(--green);display:flex;align-items:center;gap:6px"> Browse All Universities</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Not Found State -->
+<div id="notFoundState" style="display:none;text-align:center;padding:80px 5%">
+  <div style="margin-bottom:16px;display:flex;justify-content:center">
+  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="color:var(--grey-mid)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+</div>
+  <h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:700;margin-bottom:10px">University Not Found</h2>
+  <p style="color:var(--grey-dark);margin-bottom:24px">This university doesn't exist or may have been removed.</p>
+  <a href="universities.html" class="btn btn-primary">← Back to Universities</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand" style="margin-bottom:10px"><div class="logo-mark">U</div><span>Univio <em>SA</em></span></div>
+      <p>Your free guide to South African university applications.</p>
+      <div class="footer-flag" style="margin-top:16px"></div>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><a href="index.html">Home</a><a href="universities.html">Universities</a><a href="news.html">News & Deadlines</a><a href="bookmarks.html">Bookmarks</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="https://www.nsfas.org.za" target="_blank">NSFAS</a><a href="https://www.dhet.gov.za" target="_blank">DHET</a><a href="https://www.funza.mobi" target="_blank">Funza Lushaka</a></div>
+    <div class="footer-col"><h4>Admin</h4><a href="admin-login.html">Admin Login</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Univio SA,created by eYeT Solutions. Always verify with official university websites.</p>
+    <div class="footer-flag"></div>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script type="module" src="./js/firebase-config.js"></script>
+<script type="module" src="./js/app.js"></script>
+<script type="module" src="./js/detail.js"></script>
+
+<!-- PWA Install Banner -->
+<div id="pwaInstallBanner">
+  <div class="pwa-banner-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+  </div>
+  <div class="pwa-banner-text">
+    <strong>Install Univio SA</strong>
+    <span>Add to your home screen for quick access — no app store needed.</span>
+  </div>
+  <div class="pwa-banner-actions">
+    <button class="pwa-install-btn" id="pwaInstallBtn">Install App</button>
+    <button class="pwa-dismiss-btn" id="pwaDismissBtn">Not now</button>
+  </div>
+</div>
+
+<!-- Community Chat -->
+<script type="module" src="./js/chat.js"></script>
+
+<!-- PWA install prompt logic -->
+<script>
+(function() {
+  let deferredPrompt = null;
+  const DISMISSED_KEY = "univio_pwa_dismissed";
+
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!localStorage.getItem(DISMISSED_KEY)) {
+      setTimeout(() => {
+        const banner = document.getElementById("pwaInstallBanner");
+        if (banner) banner.classList.add("visible");
+      }, 3000);
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    const banner = document.getElementById("pwaInstallBanner");
+    if (banner) banner.classList.remove("visible");
+    deferredPrompt = null;
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const installBtn  = document.getElementById("pwaInstallBtn");
+    const dismissBtn  = document.getElementById("pwaDismissBtn");
+
+    installBtn?.addEventListener("click", async () => {
+      const banner = document.getElementById("pwaInstallBanner");
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === "accepted") {
+          if (banner) banner.classList.remove("visible");
+        }
+        deferredPrompt = null;
+      }
+    });
+
+    dismissBtn?.addEventListener("click", () => {
+      const banner = document.getElementById("pwaInstallBanner");
+      if (banner) banner.classList.remove("visible");
+      localStorage.setItem(DISMISSED_KEY, "1");
+    });
+  });
+})();
+</script>
+
+<script type="module">
+  import { renderNotificationBell } from "./js/notifications.js";
+  document.addEventListener("DOMContentLoaded", () => {
+    const c = document.getElementById("notifBellContainer");
+    if (c) renderNotificationBell(c);
+  });
+</script>
+</body>
+</html>

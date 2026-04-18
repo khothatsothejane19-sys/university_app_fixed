@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#007A4D" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Univio SA" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Universities — Univio SA</title>
+   <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner"><div class="loader-ring"></div><p>Loading Universities…</p></div>
+</div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand"><div class="logo-mark">U</div><span>Univio <em>SA</em></span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="universities.html" class="active">Universities</a>
+    <a href="news.html">News & Deadlines</a>
+    <a href="bookmarks.html">Bookmarks</a>
+  </div>
+  <div class="nav-actions">
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <div id="notifBellContainer"></div>
+
+    <button class="btn-bookmark-nav" onclick="location.href='bookmarks.html'" title="My Bookmarks">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span class="bookmark-count" id="navBookmarkCount"></span>
+    </button>
+    <button class="nav-hamburger" id="hamburger">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+<button class="back-to-top" id="backToTop" title="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="universities.html">Universities</a>
+  <a href="news.html">News & Deadlines</a><a href="bookmarks.html">Bookmarks</a>
+</div>
+
+<div style="background:var(--off-black);padding:100px 5% 48px;border-bottom:4px solid var(--gold)">
+  <div style="max-width:700px">
+    <div class="hero-eyebrow" style="animation:none">All Universities</div>
+    <h1 style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--white);letter-spacing:-1.5px;margin-top:12px">
+      South African <span style="color:var(--gold)">Universities</span>
+    </h1>
+    <p style="color:var(--grey-mid);margin-top:10px;font-size:1rem">Filter by province, APS or status to find your match.</p>
+  </div>
+</div>
+<div class="flag-stripe"></div>
+
+<div class="search-section">
+  <div class="search-bar-wrap">
+    <div class="search-input-wrap">
+      <span class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search universities, cities…" />
+    </div>
+    <select class="filter-select" id="provinceFilter">
+      <option value="">All Provinces</option>
+      <option>Gauteng</option><option>Western Cape</option><option>KwaZulu-Natal</option>
+      <option>Eastern Cape</option><option>Limpopo</option><option>North West</option>
+      <option>Mpumalanga</option><option>Free State</option><option>Northern Cape</option>
+    </select>
+    <select class="filter-select" id="apsFilter">
+      <option value="">Any APS</option>
+      <option value="20">20+</option><option value="25">25+</option>
+      <option value="30">30+</option><option value="35">35+</option>
+    </select>
+    <select class="filter-select" id="typeFilter">
+      <option value="">All Types</option>
+      <option value="university">Traditional University</option>
+      <option value="university_of_technology">University of Technology</option>
+      <option value="comprehensive">Comprehensive</option>
+    </select>
+  </div>
+  <div class="filter-chips">
+    <div class="chip active" data-status="">All</div>
+    <div class="chip chip-gold" data-status="open"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#22c55e"/></svg> Open</div>
+    <div class="chip" data-status="closed"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#ef4444"/></svg> Closed</div>
+    <div class="chip" data-status="coming_soon"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#eab308"/></svg> Coming Soon</div>
+  </div>
+</div>
+
+<div style="padding:16px 5% 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+  <p style="font-size:0.875rem;color:var(--grey-dark)">Showing <strong id="resultCount">—</strong> universities</p>
+  <div style="display:flex;gap:10px;align-items:center">
+    <label style="font-size:0.8rem;color:var(--grey-dark)">Sort:</label>
+    <select class="filter-select" id="sortFilter" style="min-width:auto;padding:9px 12px;font-size:0.8rem">
+      <option value="name">Name A–Z</option>
+      <option value="aps_asc">APS Low–High</option>
+      <option value="aps_desc">APS High–Low</option>
+      <option value="deadline">Deadline Soonest</option>
+    </select>
+  </div>
+</div>
+
+<section class="section" style="padding-top:24px">
+  <div class="universities-grid" id="universitiesGrid">
+    <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--grey-dark)">
+      <div class="loader-ring" style="margin:0 auto 12px"></div>
+      <p>Loading from database…</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand" style="margin-bottom:10px"><div class="logo-mark">U</div><span>Univio <em>SA</em></span></div>
+      <p>Your free guide to South African university applications.</p>
+      <div class="footer-flag" style="margin-top:16px"></div>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><a href="index.html">Home</a><a href="universities.html">Universities</a><a href="news.html">News & Deadlines</a><a href="bookmarks.html">Bookmarks</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="https://www.nsfas.org.za" target="_blank">NSFAS</a><a href="https://www.dhet.gov.za" target="_blank">DHET</a><a href="https://www.funza.mobi" target="_blank">Funza Lushaka</a></div>
+    <div class="footer-col"><h4>Admin</h4><a href="admin-login.html">Admin Login</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Univio SA,created by eYeT Solutions. Always verify with official university websites.</p>
+    <div class="footer-flag"></div>
+  </div>
+</footer>
+<div class="toast-container" id="toastContainer"></div>
+
+<script type="module" src="./js/universities.js"></script>
+<script type="module" src="./js/firebase-config.js"></script>
+<script type="module" src="./js/app.js"></script>
+
+<!-- PWA Install Banner -->
+<div id="pwaInstallBanner">
+  <div class="pwa-banner-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+  </div>
+  <div class="pwa-banner-text">
+    <strong>Install Univio SA</strong>
+    <span>Add to your home screen for quick access — no app store needed.</span>
+  </div>
+  <div class="pwa-banner-actions">
+    <button class="pwa-install-btn" id="pwaInstallBtn">Install App</button>
+    <button class="pwa-dismiss-btn" id="pwaDismissBtn">Not now</button>
+  </div>
+</div>
+
+<!-- Community Chat -->
+<script type="module" src="./js/chat.js"></script>
+
+<!-- PWA install prompt logic -->
+<script>
+(function() {
+  let deferredPrompt = null;
+  const DISMISSED_KEY = "univio_pwa_dismissed";
+
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!localStorage.getItem(DISMISSED_KEY)) {
+      setTimeout(() => {
+        const banner = document.getElementById("pwaInstallBanner");
+        if (banner) banner.classList.add("visible");
+      }, 3000);
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    const banner = document.getElementById("pwaInstallBanner");
+    if (banner) banner.classList.remove("visible");
+    deferredPrompt = null;
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const installBtn  = document.getElementById("pwaInstallBtn");
+    const dismissBtn  = document.getElementById("pwaDismissBtn");
+
+    installBtn?.addEventListener("click", async () => {
+      const banner = document.getElementById("pwaInstallBanner");
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === "accepted") {
+          if (banner) banner.classList.remove("visible");
+        }
+        deferredPrompt = null;
+      }
+    });
+
+    dismissBtn?.addEventListener("click", () => {
+      const banner = document.getElementById("pwaInstallBanner");
+      if (banner) banner.classList.remove("visible");
+      localStorage.setItem(DISMISSED_KEY, "1");
+    });
+  });
+})();
+</script>
+
+<script type="module">
+  import { renderNotificationBell } from "./js/notifications.js";
+  document.addEventListener("DOMContentLoaded", () => {
+    const c = document.getElementById("notifBellContainer");
+    if (c) renderNotificationBell(c);
+  });
+</script>
+</body>
+</html>

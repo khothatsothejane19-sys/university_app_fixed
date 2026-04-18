@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#007A4D" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Univio SA" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Univio SA — Find Your University</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner">
+    <div class="loader-ring"></div>
+    <p>Loading Univio SA…</p>
+  </div>
+</div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <div class="logo-mark">U</div>
+    <span>Univio <em>SA</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="universities.html">Universities</a>
+    <a href="news.html">News & Deadlines</a>
+    <a href="bookmarks.html">Bookmarks</a>
+  </div>
+  <div class="nav-actions">
+    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <div id="notifBellContainer"></div>
+    <button class="btn-bookmark-nav" onclick="location.href='bookmarks.html'" title="My Bookmarks">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span class="bookmark-count" id="navBookmarkCount"></span>
+    </button>
+    <button class="nav-hamburger" id="hamburger">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+<button class="back-to-top" id="backToTop" title="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="universities.html">Universities</a>
+  <a href="news.html">News & Deadlines</a>
+  <a href="bookmarks.html">Bookmarks</a>
+</div>
+
+<!-- re_9rs9ETCg_14xoQgJ5pEnX8LZFxiUo7FXG -->
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">South Africa's University Hub</div>
+  <h1>Find Your <span class="highlight">University</span><br>Apply With Confidence</h1>
+  <p class="hero-sub">Explore all South African universities in one place. Check application statuses, deadlines, APS scores and download prospectuses for free.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num" id="heroTotal">—</div><div class="label">Universities</div></div>
+    <div class="hero-stat"><div class="num" id="heroOpen">—</div><div class="label">Currently Open</div></div>
+    <div class="hero-stat"><div class="num" id="heroClosing">—</div><div class="label">Closing Soon</div></div>
+  </div>
+  <div class="hero-cta">
+    <a href="universities.html" class="btn btn-gold">Browse Universities →</a>
+    <a href="news.html" class="btn btn-outline">View Deadlines</a>
+  </div>
+  <div class="hero-scroll"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>scroll</div>
+</section>
+
+<div class="flag-stripe"></div>
+
+<div class="stats-banner">
+  <div class="stat-item"><div class="stat-num" id="statOpen">—</div><div class="stat-lbl">Open Now</div></div>
+  <div class="stat-item"><div class="stat-num" id="statClosed">—</div><div class="stat-lbl">Closed</div></div>
+  <div class="stat-item"><div class="stat-num" id="statComing">—</div><div class="stat-lbl">Coming Soon</div></div>
+  <div class="stat-item"><div class="stat-num">9</div><div class="stat-lbl">Provinces</div></div>
+</div>
+
+<!-- Featured Universities -->
+<section class="section">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">Featured <em>Universities</em></h2>
+      <p class="section-sub">Open applications shown first</p>
+    </div>
+    <a href="universities.html" class="btn btn-primary btn-sm">View All →</a>
+  </div>
+  <div class="universities-grid" id="featuredGrid">
+    <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--grey-dark);">
+      <div class="loader-ring" style="margin:0 auto 12px"></div>
+      <p>Loading universities…</p>
+    </div>
+  </div>
+</section>
+
+<!-- Why UniApply -->
+<section class="section" style="background:var(--cream)">
+  <div class="section-header">
+    <div><h2 class="section-title">Why Use <em>Univio SA</em>?</h2></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px">
+    <div style="background:var(--white);border-radius:var(--radius-md);padding:28px;border:1.5px solid var(--grey-light);box-shadow:var(--shadow-card)"><div style="font-size:2rem;margin-bottom:12px"></div><h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:8px">Live Application Status</h3><p style="font-size:0.875rem;color:var(--grey-dark);line-height:1.6">See which universities are open, closed or opening soon — updated in real-time.</p></div>
+    <div style="background:var(--white);border-radius:var(--radius-md);padding:28px;border:1.5px solid var(--grey-light);box-shadow:var(--shadow-card)"><div style="font-size:2rem;margin-bottom:12px"></div><h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:8px">Deadline Countdowns</h3><p style="font-size:0.875rem;color:var(--grey-dark);line-height:1.6">Each card shows a live countdown timer to the application deadline.</p></div>
+    <div style="background:var(--white);border-radius:var(--radius-md);padding:28px;border:1.5px solid var(--grey-light);box-shadow:var(--shadow-card)"><div style="font-size:2rem;margin-bottom:12px"></div><h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:8px">Prospectus Downloads</h3><p style="font-size:0.875rem;color:var(--grey-dark);line-height:1.6">Download the official prospectus for every university directly from each card.</p></div>
+    <div style="background:var(--white);border-radius:var(--radius-md);padding:28px;border:1.5px solid var(--grey-light);box-shadow:var(--shadow-card)"><div style="font-size:2rem;margin-bottom:12px"></div><h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:8px">Save Favourites</h3><p style="font-size:0.875rem;color:var(--grey-dark);line-height:1.6">Bookmark universities you're interested in and review them anytime.</p></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand" style="margin-bottom:10px"><div class="logo-mark">U</div><span>Univio <em>SA</em></span></div>
+      <p>Your free guide to South African university applications.</p>
+      <div class="footer-flag" style="margin-top:16px"></div>
+    </div>
+    <div class="footer-col"><h4>Navigate</h4><a href="index.html">Home</a><a href="universities.html">Universities</a><a href="news.html">News & Deadlines</a><a href="bookmarks.html">Bookmarks</a></div>
+    <div class="footer-col"><h4>Resources</h4><a href="https://www.nsfas.org.za" target="_blank">NSFAS</a><a href="https://www.dhet.gov.za" target="_blank">DHET</a><a href="https://www.funza.mobi" target="_blank">Funza Lushaka</a></div>
+    <div class="footer-col"><h4>Admin</h4><a href="admin-login.html">Admin Login</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Univio SA,created by eYeT Solutions. Always verify with official university websites.</p>
+    <div class="footer-flag"></div>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ✅ type="module" is the critical fix -->
+
+<script type="module" src="./js/firebase-config.js"></script>
+<script type="module" src="./js/app.js"></script>
+<script type="module" src="./js/index.js"></script>
+<script type="module">
+  import { renderNotificationBell } from "./js/notifications.js";
+  document.addEventListener("DOMContentLoaded", () => {
+    const c = document.getElementById("notifBellContainer");
+    if (c) renderNotificationBell(c);
+  });
+</script>
+
+
+<!-- PWA Install Banner -->
+<div id="pwaInstallBanner">
+  <div class="pwa-banner-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+  </div>
+  <div class="pwa-banner-text">
+    <strong>Install Univio SA</strong>
+    <span>Add to your home screen for quick access — no app store needed.</span>
+  </div>
+  <div class="pwa-banner-actions">
+    <button class="pwa-install-btn" id="pwaInstallBtn">Install App</button>
+    <button class="pwa-dismiss-btn" id="pwaDismissBtn">Not now</button>
+  </div>
+</div>
+
+<!-- Community Chat -->
+<script type="module" src="./js/chat.js"></script>
+
+<!-- PWA install prompt logic -->
+<script>
+(function() {
+  let deferredPrompt = null;
+  const DISMISSED_KEY = "univio_pwa_dismissed";
+
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!localStorage.getItem(DISMISSED_KEY)) {
+      setTimeout(() => {
+        const banner = document.getElementById("pwaInstallBanner");
+        if (banner) banner.classList.add("visible");
+      }, 3000);
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    const banner = document.getElementById("pwaInstallBanner");
+    if (banner) banner.classList.remove("visible");
+    deferredPrompt = null;
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const installBtn  = document.getElementById("pwaInstallBtn");
+    const dismissBtn  = document.getElementById("pwaDismissBtn");
+
+    installBtn?.addEventListener("click", async () => {
+      const banner = document.getElementById("pwaInstallBanner");
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === "accepted") {
+          if (banner) banner.classList.remove("visible");
+        }
+        deferredPrompt = null;
+      }
+    });
+
+    dismissBtn?.addEventListener("click", () => {
+      const banner = document.getElementById("pwaInstallBanner");
+      if (banner) banner.classList.remove("visible");
+      localStorage.setItem(DISMISSED_KEY, "1");
+    });
+  });
+})();
+</script>
+</body>
+</html>
