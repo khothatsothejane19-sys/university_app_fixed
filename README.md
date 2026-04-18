@@ -1,4 +1,4 @@
- UniApply Web App
+ UnivioSA Web App
 
 A Progressive Web App (PWA) that helps South African students explore universities, calculate APS, and track application deadlines.
 
